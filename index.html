@@ -14,14 +14,30 @@
         function saveData() {
             const data = document.getElementById("dataInput").value;
 
-            fetch("http://13.48.67.92:3000/save", {
+            if (!data) {
+                alert("Please enter some data.");
+                return;
+            }
+
+            fetch("https://backend-iphuyettn-sathiska-sasindus-projects.vercel.app/save", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ data: data })
             })
-            .then(response => response.json())
-            .then(data => alert(data.message))
-            .catch(error => console.error("Error:", error));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(result => {
+                console.log('Success:', result);
+                alert("Data saved successfully!");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("An error occurred. Please try again.");
+            });
         }
     </script>
 </body>
