@@ -14,7 +14,7 @@
         function saveData() {
             const data = document.getElementById("dataInput").value;
 
-            fetch("http://localhost:3000/save", {
+            fetch("http://13.48.67.92:3000/save", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ data: data })
